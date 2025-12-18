@@ -12,4 +12,24 @@ interface RepositoryDataSiswa {
 
     // Fungsi untuk menambah data (Create)
     suspend fun postDataSiswa(dataSiswa: DataSiswa): Response<Void>
+
+
+
+    /**
+     * Implementasi repositori yang menggunakan layanan jaringan (Retrofit).
+     */
+    class JaringanRepositoryDataSiswa(
+        private val serviceApiSiswa: ServiceApiSiswa
+    ) : RepositoryDataSiswa {
+
+        // Implementasi metode akan ditambahkan di commit berikutnya
+        override suspend fun getDataSiswa(): List<DataSiswa> {
+            TODO("Not yet implemented")
+        }
+
+        override suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void> {
+            TODO("Not yet implemented")
+        }
+    }
+
 }
