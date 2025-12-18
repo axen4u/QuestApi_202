@@ -1,49 +1,23 @@
 package com.example.questapi_202.repositori
 
+import com.example.questapi_202.apiservice.ServiceApiSiswa
 import com.example.questapi_202.modeldata.DataSiswa
-import retrofit2.Response
 
-/** * Interface repositori untuk memisahkan logika bisnis dari sumber data.
- */
 interface RepositoryDataSiswa {
-
-    // Fungsi untuk mengambil data (Read)
     suspend fun getDataSiswa(): List<DataSiswa>
+    suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void>
 
-    // Fungsi untuk menambah data (Create)
-    suspend fun postDataSiswa(dataSiswa: DataSiswa): Response<Void>
+    // Placeholder untuk fitur Update dan Delete di masa depan
+    // suspend fun getSatuSiswa(id:Int) : DataSiswa
+    // suspend fun editSatuSiswa(id:Int, dataSiswa: DataSiswa): retrofit2.Response<Void>
+    // suspend fun hapusSatuSiswa(id:Int): retrofit2.Response<Void>
+}
 
+class JaringanRepositoryDataSiswa(
+    private val serviceApiSiswa: ServiceApiSiswa
+) : RepositoryDataSiswa {
+    override suspend fun getDataSiswa(): List<DataSiswa> = serviceApiSiswa.getSiswa()
 
-
-    /**
-     * Implementasi repositori yang menggunakan layanan jaringan (Retrofit).
-     */
-    class JaringanRepositoryDataSiswa(
-        private val serviceApiSiswa: ServiceApiSiswa
-    ) : RepositoryDataSiswa {
-
-        // Implementasi metode akan ditambahkan di commit berikutnya
-        override suspend fun getDataSiswa(): List<DataSiswa> {
-            TODO("Not yet implemented")
-        }
-
-        override suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void> {
-            TODO("Not yet implemented")
-        }
-    }
-
-
-    class JaringanRepositoryDataSiswa(
-        private val serviceApiSiswa: ServiceApiSiswa
-    ) : RepositoryDataSiswa {
-
-        // Mengambil data dari endpoint bacaTeman.php
-        override suspend fun getDataSiswa(): List<DataSiswa> = serviceApiSiswa.getSiswa()
-
-        // Mengirim data ke endpoint insertTM.php
-        override suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void> =
-            serviceApiSiswa.postSiswa(dataSiswa)
-    }
-
-
+    override suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void> =
+        serviceApiSiswa.postSiswa(dataSiswa)
 }
