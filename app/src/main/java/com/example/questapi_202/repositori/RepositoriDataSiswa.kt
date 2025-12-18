@@ -32,4 +32,18 @@ interface RepositoryDataSiswa {
         }
     }
 
+
+    class JaringanRepositoryDataSiswa(
+        private val serviceApiSiswa: ServiceApiSiswa
+    ) : RepositoryDataSiswa {
+
+        // Mengambil data dari endpoint bacaTeman.php
+        override suspend fun getDataSiswa(): List<DataSiswa> = serviceApiSiswa.getSiswa()
+
+        // Mengirim data ke endpoint insertTM.php
+        override suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void> =
+            serviceApiSiswa.postSiswa(dataSiswa)
+    }
+
+
 }
