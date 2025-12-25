@@ -8,6 +8,26 @@ import com.example.questapi_202.repositori.RepositoryDataSiswa
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+// ... imports
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+
+// ... (class body)
+
+var listSiswa: StatusUiSiswa by mutableStateOf(StatusUiSiswa.Loading)
+    private set
+
+// Fungsi untuk memulai pengambilan data
+fun loadSiswa() {
+    viewModelScope.launch {
+        // Set status ke Loading setiap kali fungsi dipanggil
+        listSiswa = StatusUiSiswa.Loading
+
+        // Logika try-catch akan ditambahkan di commit berikutnya
+    }
+}
+}
+
 
 // ... (interface StatusUiSiswa)
 
