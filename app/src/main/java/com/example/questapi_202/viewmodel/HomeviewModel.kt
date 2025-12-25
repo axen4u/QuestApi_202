@@ -12,6 +12,23 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+// ... (imports)
+
+fun loadSiswa() {
+    viewModelScope.launch {
+        listSiswa = StatusUiSiswa.Loading
+
+        // Mencoba mengambil data
+        listSiswa = try {
+            StatusUiSiswa.Success(repositoryDataSiswa.getDataSiswa())
+        } catch (e: Exception) {
+            // Placeholder error handling sementara
+            StatusUiSiswa.Error
+        }
+    }
+}
+
+
 // ... (class body)
 
 var listSiswa: StatusUiSiswa by mutableStateOf(StatusUiSiswa.Loading)
