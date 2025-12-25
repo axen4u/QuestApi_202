@@ -13,6 +13,25 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 // ... (imports)
+// ... imports
+import retrofit2.HttpException
+import java.io.IOException
+
+// ... (dalam fungsi loadSiswa)
+
+fun loadSiswa() {
+    viewModelScope.launch {
+        listSiswa = StatusUiSiswa.Loading
+        listSiswa = try {
+            StatusUiSiswa.Success(repositoryDataSiswa.getDataSiswa())
+        } catch (e: IOException) {
+            StatusUiSiswa.Error // Error Koneksi
+        } catch (e: HttpException) {
+            StatusUiSiswa.Error // Error Server
+        }
+    }
+}
+
 
 fun loadSiswa() {
     viewModelScope.launch {
