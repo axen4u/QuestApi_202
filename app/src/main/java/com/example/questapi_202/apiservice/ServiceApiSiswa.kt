@@ -7,6 +7,18 @@ import retrofit2.http.Body // Tambah import ini
 import retrofit2.http.POST // Tambah import ini
 // ... imports sebelumnya
 import retrofit2.http.Query // Tambah import ini
+// ... imports sebelumnya
+import retrofit2.http.PUT // Tambah import ini
+
+interface ServiceApiSiswa {
+    // ... fungsi sebelumnya
+
+    @PUT("editTM.php/{id}")    suspend fun editSatuSiswa(
+        @Query("id") id: Int,
+        @Body dataSiswa: DataSiswa
+    ): Response<Void>
+}
+
 
 interface ServiceApiSiswa {
     // ... fungsi sebelumnya
