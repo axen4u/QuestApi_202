@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
+
 @Composable
 fun DataSiswaApp(navController: NavHostController = rememberNavController()) {
     Scaffold(
@@ -90,3 +91,26 @@ NavHost(...) {
     }
 }
 }
+// ... (imports)
+
+// ... (bagian atas tetap sama)
+
+composable(DestinasiHome.route) {            HomeScreenUtama(
+    // PERUBAHAN: Menambahkan aksi navigasi
+    navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
+    onDetailClick = { /* TODO */ }
+)
+}
+
+// ... (imports)
+
+composable(DestinasiEntry.route) {
+    EntrySiswaScreen(
+        navigateBack = {
+            navController.navigate(DestinasiHome.route) {// PERUBAHAN: Membersihkan stack agar tombol back Android bekerja normal
+                popUpTo(DestinasiHome.route) { inclusive = true }
+            }
+        }
+    )
+}
+
