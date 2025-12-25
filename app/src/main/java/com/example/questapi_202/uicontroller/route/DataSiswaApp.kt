@@ -29,3 +29,22 @@ fun HostNavigasi(
 ) {
     // NavHost akan ditambahkan di commit berikutnya
 }
+// ... imports
+import androidx.navigation.compose.NavHost
+import com.example.questapi_202.uicontroller.route.DestinasiHome
+
+// ... (DataSiswaApp tetap sama)
+
+@Composable
+fun HostNavigasi(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = DestinasiHome.route,
+        modifier = modifier
+    ) {
+        // Rute-rute (composable) akan ditambahkan bertahap
+    }
+}
