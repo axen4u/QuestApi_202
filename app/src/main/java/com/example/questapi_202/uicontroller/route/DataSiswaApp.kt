@@ -48,3 +48,28 @@ fun HostNavigasi(
         // Rute-rute (composable) akan ditambahkan bertahap
     }
 }
+// ... imports
+import androidx.navigation.compose.composable
+import com.example.questapi_202.uicontroller.view.HomeScreenUtama
+
+// ... (DataSiswaApp tetap sama)
+
+@Composable
+fun HostNavigasi(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = DestinasiHome.route,
+        modifier = modifier
+    ) {
+        // Rute Halaman Home
+        composable(DestinasiHome.route) {
+            HomeScreenUtama(
+                navigateToItemEntry = { /* TODO: Implement navigation */ },
+                onDetailClick = { /* TODO: Implement detail click */ }
+            )
+        }
+    }
+}
