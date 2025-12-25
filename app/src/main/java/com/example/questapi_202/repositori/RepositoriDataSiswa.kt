@@ -28,3 +28,16 @@ class JaringanRepositoryDataSiswa(
     override suspend fun editSatuSiswa(id: Int, dataSiswa: DataSiswa): Response<Void> = TODO()
     override suspend fun hapusSatuSiswa(id: Int): Response<Void> = TODO()
 }
+class JaringanRepositoryDataSiswa(
+    private val serviceApiSiswa: ServiceApiSiswa
+) : RepositoryDataSiswa {
+    // ... (fungsi sebelumnya)
+
+    override suspend fun getSatuSiswa(id: Int): DataSiswa = serviceApiSiswa.getSatuSiswa(id)
+
+    override suspend fun editSatuSiswa(id: Int, dataSiswa: DataSiswa): Response<Void> =
+        serviceApiSiswa.editSatuSiswa(id, dataSiswa)
+
+    // Hapus masih TODO
+    override suspend fun hapusSatuSiswa(id: Int): Response<Void> = TODO()
+}
