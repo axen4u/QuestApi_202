@@ -73,3 +73,20 @@ fun HostNavigasi(
         }
     }
 }
+// ... imports
+import com.example.questapi_202.uicontroller.route.DestinasiEntry
+import com.example.questapi_202.uicontroller.view.EntrySiswaScreen
+
+// ... (bagian atas tetap sama)
+
+NavHost(...) {
+    // ... (composable Home tetap ada)
+
+    // Rute Halaman Entry
+    composable(DestinasiEntry.route) {
+        EntrySiswaScreen(
+            navigateBack = { /* TODO: Implement back navigation */ }
+        )
+    }
+}
+}
