@@ -45,3 +45,19 @@ class DefaultContainerApp : ContainerApp {
     override val repositoryDataSiswa: RepositoryDataSiswa
         get() = TODO("Not yet implemented")
 }
+
+// ... (Kode sebelumnya)
+
+class DefaultContainerApp : ContainerApp {
+    // ... (Kode konfigurasi Retrofit)
+
+    private val retrofitService: ServiceApiSiswa by lazy {
+        retrofit.create(ServiceApiSiswa::class.java)
+    }
+
+    // Implementasi Repository yang sesungguhnya
+    // Memasukkan retrofitService ke dalam konstruktor repositori
+    override val repositoryDataSiswa: RepositoryDataSiswa by lazy {
+        JaringanRepositoryDataSiswa(retrofitService)
+    }
+}
