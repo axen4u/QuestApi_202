@@ -4,6 +4,20 @@ import androidx.lifecycle.ViewModel
 import com.example.questapi_202.modeldata.DataSiswa
 // ... imports
 import com.example.questapi_202.repositori.RepositoryDataSiswa
+// ... imports
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+
+// ... (interface StatusUiSiswa)
+
+class HomeViewModel(private val repositoryDataSiswa: RepositoryDataSiswa) : ViewModel() {
+
+    // Properti state yang bisa berubah, default-nya Loading
+    var listSiswa: StatusUiSiswa by mutableStateOf(StatusUiSiswa.Loading)
+        private set
+}
+
 
 sealed interface StatusUiSiswa {
     // ... (kode interface tetap sama)
