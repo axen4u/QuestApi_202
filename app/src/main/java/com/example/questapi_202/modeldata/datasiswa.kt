@@ -27,3 +27,13 @@ data class UIStateSiswa(
 
 // ... (DetailSiswa)
 
+// ... (kode class sebelumnya)
+
+fun DetailSiswa.toDataSiswa(): DataSiswa = DataSiswa(
+    id = id,
+    nama = nama,
+    alamat = alamat,
+    telpon = telpon
+)
+
+
