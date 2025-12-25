@@ -1,23 +1,7 @@
 package com.example.questapi_202.repositori
 
-import com.example.questapi_202.apiservice.ServiceApiSiswa
 import com.example.questapi_202.modeldata.DataSiswa
 
 interface RepositoryDataSiswa {
-    suspend fun getDataSiswa(): List<DataSiswa>
-    suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void>
-
-    // Placeholder untuk fitur Update dan Delete di masa depan
-    // suspend fun getSatuSiswa(id:Int) : DataSiswa
-    // suspend fun editSatuSiswa(id:Int, dataSiswa: DataSiswa): retrofit2.Response<Void>
-    // suspend fun hapusSatuSiswa(id:Int): retrofit2.Response<Void>
-}
-
-class JaringanRepositoryDataSiswa(
-    private val serviceApiSiswa: ServiceApiSiswa
-) : RepositoryDataSiswa {
-    override suspend fun getDataSiswa(): List<DataSiswa> = serviceApiSiswa.getSiswa()
-
-    override suspend fun postDataSiswa(dataSiswa: DataSiswa): retrofit2.Response<Void> =
-        serviceApiSiswa.postSiswa(dataSiswa)
+    // Fungsi CRUD akan ditambahkan bertahap
 }
