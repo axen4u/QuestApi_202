@@ -1,63 +1,50 @@
 package com.example.questapi_202.repositori
 
-/**
- * Interface ContainerApp berfungsi sebagai wadah untuk dependensi aplikasi.
- * Menyediakan akses abstrak ke repositori.
- */
+import com.example.questapi_202.apiservice.ServiceApiSiswa
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+// 1. Interface Container untuk Dependency Injection
 interface ContainerApp {
     val repositoryDataSiswa: RepositoryDataSiswa
 }
 
-// ... (Interface ContainerApp)
-
-import okhttp3.OkHttpClient
-
 // 2. Implementasi Default Container
 class DefaultContainerApp : ContainerApp {
 
-    // Alamat IP Loopback Emulator Android (mengarah ke localhost komputer)
     private val baseurl = "http://10.0.2.2/umyTI/"
 
-    // Client HTTP dasar
+    // Client HTTP dasar (Tanpa logging interceptor untuk saat ini agar tidak error)
     private val klien = OkHttpClient.Builder()
         .build()
 
-    // Properti lainnya akan ditambahkan pada commit berikutnya
-    override val repositoryDataSiswa: RepositoryDataSiswa
-        get() = TODO("Not yet implemented")
-}
-
-// ... (Interface ContainerApp)
-
-import okhttp3.OkHttpClient
-
-// 2. Implementasi Default Container
-class DefaultContainerApp : ContainerApp {
-
-    // Alamat IP Loopback Emulator Android (mengarah ke localhost komputer)
-    private val baseurl = "http://10.0.2.2/umyTI/"
-
-    // Client HTTP dasar
-    private val klien = OkHttpClient.Builder()
+    // Konfigurasi Retrofit
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(baseurl)
+        // PERBAIKAN: Gunakan GsonConverterFactory (sesuai library yang sudah Anda install)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(klien)
         .build()
 
-    // Properti lainnya akan ditambahkan pada commit berikutnya
-    override val repositoryDataSiswa: RepositoryDataSiswa
-        get() = TODO("Not yet implemented")
-}
-
-// ... (Kode sebelumnya)
-
-class DefaultContainerApp : ContainerApp {
-    // ... (Kode konfigurasi Retrofit)
-
+    // Inisialisasi Service API secara Lazy
     private val retrofitService: ServiceApiSiswa by lazy {
         retrofit.create(ServiceApiSiswa::class.java)
     }
 
-    // Implementasi Repository yang sesungguhnya
-    // Memasukkan retrofitService ke dalam konstruktor repositori
+    // Implementasi Repository yang akan digunakan di ViewModel
     override val repositoryDataSiswa: RepositoryDataSiswa by lazy {
         JaringanRepositoryDataSiswa(retrofitService)
+    }
+}
+
+// 3. Class Application untuk inisialisasi Container di tingkat aplikasi
+class AplikasiDataSiswa : android.app.Application() {
+    lateinit var container: ContainerApp
+
+    override fun onCreate() {
+        super.onCreate()
+        // Inisialisasi container saat aplikasi dijalankan
+        this.container = DefaultContainerApp()
     }
 }
